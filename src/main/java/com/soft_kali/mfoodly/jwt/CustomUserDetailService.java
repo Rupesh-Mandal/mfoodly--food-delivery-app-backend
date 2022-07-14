@@ -1,12 +1,13 @@
-package com.rupesh_mandal.blog_app_backend.security;
+package com.soft_kali.mfoodly.jwt;
 
-import com.rupesh_mandal.blog_app_backend.entity.UserEntity;
-import com.rupesh_mandal.blog_app_backend.exeptions.ResourceNotFountException;
-import com.rupesh_mandal.blog_app_backend.repository.UserRepository;
+import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.exeptions.ResourceNotFountException;
+import com.soft_kali.mfoodly.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -20,7 +21,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         System.out.println(username);
-        UserEntity userEntity=userRepository.findByEmail(username).orElseThrow(()-> new ResourceNotFountException("User" ,"email",username));
+        UserEntity userEntity=userRepository.findByPhoneNumber(username).orElseThrow(()-> new ResourceNotFountException("User" ,"email",username));
 
 
         return userEntity;

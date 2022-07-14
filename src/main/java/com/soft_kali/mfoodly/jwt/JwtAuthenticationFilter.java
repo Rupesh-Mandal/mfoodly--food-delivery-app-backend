@@ -1,14 +1,16 @@
-package com.rupesh_mandal.blog_app_backend.security;
+package com.soft_kali.mfoodly.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -27,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenHelper jwtTokenHelper;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
 
         String requestToken = request.getHeader("Authorization");
         System.out.println(requestToken);
@@ -71,6 +73,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
-        filterChain.doFilter(request,response);
+
+        try {
+            filterChain.doFilter(request,response);
+        } catch (IOException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        } catch (ServletException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
     }
 }

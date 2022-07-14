@@ -1,4 +1,4 @@
-package com.rupesh_mandal.blog_app_backend.exeptions;
+package com.soft_kali.mfoodly.exeptions;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,9 +1,9 @@
-package com.rupesh_mandal.blog_app_backend.config;
+package com.soft_kali.mfoodly.config;
 
 
-import com.rupesh_mandal.blog_app_backend.security.CustomUserDetailService;
-import com.rupesh_mandal.blog_app_backend.security.JwtAuthenticationEntryPoint;
-import com.rupesh_mandal.blog_app_backend.security.JwtAuthenticationFilter;
+import com.soft_kali.mfoodly.jwt.CustomUserDetailService;
+import com.soft_kali.mfoodly.jwt.JwtAuthenticationEntryPoint;
+import com.soft_kali.mfoodly.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,11 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String[] PUBLIC_URL={
             "/api/v1/auth/**",
-            "/v3/api-docs",
-            "/v2/api-docs",
-            "/swagger-resources/**",
-            "/swagger-ui/**",
-            "/webjars/**"
+            "/api/user/"
     };
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -42,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -49,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeHttpRequests()
                 .antMatchers(PUBLIC_URL).permitAll()
-                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -64,14 +62,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder);
 
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+
 
     @Bean
     @Override

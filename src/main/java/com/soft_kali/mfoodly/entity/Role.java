@@ -1,4 +1,4 @@
-package com.rupesh_mandal.blog_app_backend.entity;
+package com.soft_kali.mfoodly.entity;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Role {
 
     @Id
-    private int roleId;
+    private Long roleId;
     private String name;
 
 

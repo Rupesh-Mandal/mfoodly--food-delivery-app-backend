@@ -1,12 +1,12 @@
-package com.rupesh_mandal.blog_app_backend.repository;
+package com.soft_kali.mfoodly.repository;
 
-import com.rupesh_mandal.blog_app_backend.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByPhoneNumber(String email);
 
 }

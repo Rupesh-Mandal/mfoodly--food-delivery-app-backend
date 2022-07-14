@@ -1,5 +1,7 @@
-package com.rupesh_mandal.blog_app_backend.entity;
+package com.soft_kali.mfoodly.entity;
 
+import com.soft_kali.mfoodly.entity.location.CityEntity;
+import com.soft_kali.mfoodly.entity.product_order.ProductOrderEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,21 +24,20 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
+    private Long userId;
 
     private String name;
-    private String email;
+
+
+    @Column(unique = true, nullable = false)
+    private String phoneNumber;
 
     private String password;
-    private String about;
 
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<PostEntity> postEntityList = new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CommentEntity> commentEntityList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "cityId")
+    private CityEntity cityEntity;
 
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -44,6 +45,18 @@ public class UserEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
     private List<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductReviewEntity> productReviewEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OutletEntity> outletEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProductOrderEntity> productOrderEntityList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AddressBookEntity> addressBookEntities = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,7 +66,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return phoneNumber;
     }
 
     @Override

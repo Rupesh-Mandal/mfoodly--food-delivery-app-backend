@@ -1,10 +1,6 @@
-package com.soft_kali.mfoodly.dto;
+package com.soft_kali.mfoodly.dto.location;
 
-import com.soft_kali.mfoodly.entity.location.DistrictsEntity;
 import lombok.*;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor

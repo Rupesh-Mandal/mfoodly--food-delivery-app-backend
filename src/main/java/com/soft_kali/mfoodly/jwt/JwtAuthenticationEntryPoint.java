@@ -1,4 +1,4 @@
-package com.rupesh_mandal.blog_app_backend.security;
+package com.soft_kali.mfoodly.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

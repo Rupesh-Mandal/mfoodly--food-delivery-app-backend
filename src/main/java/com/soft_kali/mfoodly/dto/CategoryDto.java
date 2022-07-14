@@ -1,4 +1,4 @@
-package com.rupesh_mandal.blog_app_backend.payloads;
+package com.soft_kali.mfoodly.dto;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDto {
-    private int categoryId;
+    private Long categoryId;
 
     @NotEmpty(message = "Category not be Empty !!")
     private String categoryTitle;

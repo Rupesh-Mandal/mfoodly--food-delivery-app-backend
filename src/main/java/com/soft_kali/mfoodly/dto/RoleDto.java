@@ -1,16 +1,15 @@
-package com.rupesh_mandal.blog_app_backend.payloads;
+package com.soft_kali.mfoodly.dto;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 @Data
 @Setter
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class RoleDto {
-    private int roleId;
+    private Long roleId;
     private String name;
 }

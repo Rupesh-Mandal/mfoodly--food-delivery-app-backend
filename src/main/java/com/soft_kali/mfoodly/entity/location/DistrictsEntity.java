@@ -1,6 +1,5 @@
 package com.soft_kali.mfoodly.entity.location;
 
-import com.soft_kali.mfoodly.entity.ProductEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,18 +12,24 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Data
-public class Districts {
+public class DistrictsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long districtsId;
+    private int districtsId;
     private String name;
 
 
-    @OneToMany(mappedBy = "districts", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<City> cityList=new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "countrytId")
-    private Country country;
+    private CountryEntity countryEntity;
+
+    public DistrictsEntity(int districtsId, String name, CountryEntity countryEntity) {
+        this.districtsId = districtsId;
+        this.name = name;
+        this.countryEntity = countryEntity;
+    }
+
+    @OneToMany(mappedBy = "districtsEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    List<CityEntity> cityList=new ArrayList<>();
+
 }

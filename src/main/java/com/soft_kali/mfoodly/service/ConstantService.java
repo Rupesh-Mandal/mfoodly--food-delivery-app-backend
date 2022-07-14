@@ -1,2 +1,7 @@
-package com.soft_kali.mfoodly.service;public interface ConstantService {
+package com.soft_kali.mfoodly.service;
+
+public interface ConstantService {
+
+    void saveConstant();
+
 }

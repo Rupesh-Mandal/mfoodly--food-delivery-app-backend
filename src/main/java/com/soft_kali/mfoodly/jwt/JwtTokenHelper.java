@@ -1,20 +1,21 @@
-package com.rupesh_mandal.blog_app_backend.security;
+package com.soft_kali.mfoodly.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Component
+@Service
 public class JwtTokenHelper {
 
-    private String SECRET_KEY = "secret";
+    private String SECRET_KEY = "kali883";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

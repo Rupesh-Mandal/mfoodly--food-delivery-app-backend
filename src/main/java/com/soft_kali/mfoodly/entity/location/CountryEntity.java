@@ -12,14 +12,17 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Data
-public class Country {
+public class CountryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long countrytId;
+    private int countrytId;
     private String name;
 
+    public CountryEntity(int countrytId, String name) {
+        this.countrytId = countrytId;
+        this.name = name;
+    }
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<Districts> districtsList=new ArrayList<>();
+    @OneToMany(mappedBy = "countryEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    List<DistrictsEntity> districtsEntityList =new ArrayList<>();
 }

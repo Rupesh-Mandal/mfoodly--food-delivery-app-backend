@@ -1,12 +1,12 @@
-package com.rupesh_mandal.blog_app_backend.exeptions;
+package com.soft_kali.mfoodly.exeptions;
 
-import com.google.gson.Gson;
-import com.rupesh_mandal.blog_app_backend.payloads.ApiResponse;
+
+import com.soft_kali.mfoodly.model.ApiResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -29,11 +29,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UnauthorizeRequest.class)
+    public ResponseEntity<ApiResponse> unauthorizeRequestExceptionHandler(UnauthorizeRequest exception){
+        String message=exception.getMessage();
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
+    }
+
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<ApiResponse> exception(Exception exception){
 //        String message=exception.getMessage();
 //        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
 //    }
+
+    @ExceptionHandler(IllegalAccessException.class)
+    public ResponseEntity<ApiResponse> exception(IllegalAccessException exception){
+        String message=exception.getMessage();
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException exception){
@@ -46,6 +58,13 @@ public class GlobalExceptionHandler {
         });
 
         return new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse> dataIntegrityViolationException(DataIntegrityViolationException exception){
+        String message=exception.getMessage();
+        System.out.println(exception);
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
     }
 
 }

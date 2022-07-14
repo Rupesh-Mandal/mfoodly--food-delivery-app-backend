@@ -1,14 +1,11 @@
-package com.rupesh_mandal.blog_app_backend.payloads;
+package com.soft_kali.mfoodly.dto;
 
-import com.rupesh_mandal.blog_app_backend.entity.Role;
+import com.soft_kali.mfoodly.dto.location.CityDto;
 import lombok.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,22 +16,21 @@ import java.util.List;
 public class UserDto {
 
     @Valid
-    private int userId;
+    private Long userId;
 
     @NotEmpty()
     @Size(min = 4,message = "Username must be min 4 charactes !!")
     private String name;
 
-    @Email(message = "Email address is not valid !!")
-    private String email;
+    @Size(min = 10, max = 10, message = "phone number must be 10 characters !!")
+    private String phoneNumber;
 
     @NotEmpty
     @Size(min = 4,max = 10,message = "password must be min 4 charactes and max 10 characters !!")
     private String password;
 
-    @NotEmpty
-    private String about;
 
     private List<RoleDto> roles;
+    private CityDto cityEntity;
 
 }

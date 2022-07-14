@@ -15,13 +15,16 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CategoryEntity {
+public class SubCartEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryId;
+    private Long subCartId;
 
-    private String categoryTitle;
-    private String categoryDescription;
+    private int quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private ProductEntity productEntity;
 
 }
