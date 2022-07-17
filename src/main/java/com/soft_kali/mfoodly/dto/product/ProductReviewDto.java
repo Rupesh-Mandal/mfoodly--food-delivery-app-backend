@@ -1,12 +1,8 @@
-package com.soft_kali.mfoodly.dto;
+package com.soft_kali.mfoodly.dto.product;
 
 
-import com.soft_kali.mfoodly.entity.ProductEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.dto.user.UserDto;
 import lombok.*;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Data
 @Setter

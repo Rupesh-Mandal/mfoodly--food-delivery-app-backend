@@ -1,7 +1,8 @@
-package com.soft_kali.mfoodly.entity;
+package com.soft_kali.mfoodly.entity.product;
 
 
 import com.soft_kali.mfoodly.entity.location.CityEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @Data
-public class ProductEntity {
+public class  ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +51,6 @@ public class ProductEntity {
     private List<CategoryEntity> categoryEntities = new ArrayList<>();
 
 
-
-    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<ProductReviewEntity> productReviewEntityList=new ArrayList<>();
 
 
 }

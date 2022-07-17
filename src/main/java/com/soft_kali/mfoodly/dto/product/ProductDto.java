@@ -1,7 +1,8 @@
-package com.soft_kali.mfoodly.dto;
+package com.soft_kali.mfoodly.dto.product;
 
 
 
+import com.soft_kali.mfoodly.dto.user.OutletDto;
 import com.soft_kali.mfoodly.dto.location.CityDto;
 import lombok.*;
 
@@ -32,7 +33,6 @@ public class ProductDto {
 
     private List<CategoryDto> categoryEntities;
 
-    private List<ProductReviewDto> productReviewEntityList;
 
 
 }

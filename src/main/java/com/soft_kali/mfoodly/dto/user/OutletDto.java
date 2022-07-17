@@ -1,4 +1,4 @@
-package com.soft_kali.mfoodly.dto;
+package com.soft_kali.mfoodly.dto.user;
 
 import com.soft_kali.mfoodly.dto.location.CityDto;
 import lombok.*;

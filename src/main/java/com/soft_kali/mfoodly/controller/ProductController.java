@@ -1,9 +1,8 @@
 package com.soft_kali.mfoodly.controller;
 
 
-import com.soft_kali.mfoodly.dto.CategoryDto;
-import com.soft_kali.mfoodly.dto.ProductDto;
-import com.soft_kali.mfoodly.entity.CategoryEntity;
+import com.soft_kali.mfoodly.dto.product.CategoryDto;
+import com.soft_kali.mfoodly.dto.product.ProductDto;
 import com.soft_kali.mfoodly.model.ApiResponse;
 import com.soft_kali.mfoodly.model.ProductResponse;
 import com.soft_kali.mfoodly.service.ProductService;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

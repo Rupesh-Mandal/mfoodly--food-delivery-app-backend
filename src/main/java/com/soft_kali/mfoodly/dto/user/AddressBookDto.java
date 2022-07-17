@@ -1,6 +1,6 @@
-package com.soft_kali.mfoodly.dto;
+package com.soft_kali.mfoodly.dto.user;
 
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.dto.location.CityDto;
 import lombok.*;
 
 @Data
@@ -14,6 +14,8 @@ public class AddressBookDto {
     private String deliveryAddress1;
     private String deliveryAddress2;
     private String deliveryAddressPhoneNumber;
+    private CityDto cityEntity;
+
     private UserDto userEntity;
 
 }

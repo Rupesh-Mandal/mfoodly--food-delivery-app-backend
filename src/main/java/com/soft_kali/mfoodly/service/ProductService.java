@@ -1,7 +1,7 @@
 package com.soft_kali.mfoodly.service;
 
-import com.soft_kali.mfoodly.dto.CategoryDto;
-import com.soft_kali.mfoodly.dto.ProductDto;
+import com.soft_kali.mfoodly.dto.product.CategoryDto;
+import com.soft_kali.mfoodly.dto.product.ProductDto;
 import com.soft_kali.mfoodly.model.ProductResponse;
 import org.springframework.data.domain.Pageable;
 

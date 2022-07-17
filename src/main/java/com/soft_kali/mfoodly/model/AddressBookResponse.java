@@ -1,7 +1,6 @@
 package com.soft_kali.mfoodly.model;
 
-import com.soft_kali.mfoodly.dto.AddressBookDto;
-import com.soft_kali.mfoodly.dto.product_order.ProductOrderDto;
+import com.soft_kali.mfoodly.dto.user.AddressBookDto;
 import lombok.*;
 
 import java.util.List;

@@ -1,19 +1,18 @@
 package com.soft_kali.mfoodly.service.impl;
 
-import com.soft_kali.mfoodly.dto.CategoryDto;
-import com.soft_kali.mfoodly.dto.ProductDto;
+import com.soft_kali.mfoodly.dto.product.CategoryDto;
+import com.soft_kali.mfoodly.dto.product.ProductDto;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.exeptions.UnauthorizeRequest;
 import com.soft_kali.mfoodly.model.ProductResponse;
-import com.soft_kali.mfoodly.entity.CategoryEntity;
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.ProductEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.product.CategoryEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.product.ProductEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.exeptions.ResourceNotFountException;
 import com.soft_kali.mfoodly.repository.CategoryRepository;
 import com.soft_kali.mfoodly.repository.OutletRepository;
 import com.soft_kali.mfoodly.repository.ProductRepositoy;
-import com.soft_kali.mfoodly.repository.UserRepository;
 import com.soft_kali.mfoodly.repository.location.CityRepository;
 import com.soft_kali.mfoodly.service.ProductService;
 import com.soft_kali.mfoodly.utils.AppConstants;

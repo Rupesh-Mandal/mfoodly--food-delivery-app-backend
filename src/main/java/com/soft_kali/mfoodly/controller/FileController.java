@@ -1,13 +1,10 @@
 package com.soft_kali.mfoodly.controller;
 
-import com.soft_kali.mfoodly.dto.OutletDto;
-import com.soft_kali.mfoodly.dto.ProductDto;
-import com.soft_kali.mfoodly.repository.ProductRepositoy;
+import com.soft_kali.mfoodly.dto.product.ProductDto;
 import com.soft_kali.mfoodly.service.FileService;
 import com.soft_kali.mfoodly.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;

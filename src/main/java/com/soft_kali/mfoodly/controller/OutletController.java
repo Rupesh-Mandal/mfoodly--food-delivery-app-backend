@@ -1,6 +1,6 @@
 package com.soft_kali.mfoodly.controller;
 
-import com.soft_kali.mfoodly.dto.OutletDto;
+import com.soft_kali.mfoodly.dto.user.OutletDto;
 import com.soft_kali.mfoodly.model.OutletResponse;
 import com.soft_kali.mfoodly.service.OutletService;
 import com.soft_kali.mfoodly.utils.AppConstants;

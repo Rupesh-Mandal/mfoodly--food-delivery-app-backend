@@ -1,11 +1,13 @@
 package com.soft_kali.mfoodly.service.impl;
 
-import com.soft_kali.mfoodly.entity.CategoryEntity;
-import com.soft_kali.mfoodly.entity.Role;
+import com.soft_kali.mfoodly.entity.product.CategoryEntity;
+import com.soft_kali.mfoodly.entity.role.Role;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.entity.location.CountryEntity;
 import com.soft_kali.mfoodly.entity.location.DistrictsEntity;
+import com.soft_kali.mfoodly.entity.status.OrderStatusEntity;
 import com.soft_kali.mfoodly.repository.CategoryRepository;
+import com.soft_kali.mfoodly.repository.OrderStatusRepository;
 import com.soft_kali.mfoodly.repository.RoleRepository;
 import com.soft_kali.mfoodly.repository.location.CityRepository;
 import com.soft_kali.mfoodly.repository.location.CountryRepository;
@@ -35,11 +37,46 @@ public class ConstantServiceImpl implements ConstantService {
     @Autowired
     CityRepository cityRepository;
 
+    @Autowired
+    OrderStatusRepository orderStatusRepository;
+
     @Override
     public void saveConstant() {
         registerRole();
         registerCategory();
         registerLocation();
+        registerOrderStatus();
+
+    }
+
+    private void registerOrderStatus() {
+        OrderStatus status=new OrderStatus();
+        List<OrderStatusEntity> orderStatusEntityList=new ArrayList<>();
+        orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_PENDING_TO_ACCEPT(),
+                status.getSTATUS_PENDING_TO_ACCEPT_NAME(),status.getSTATUS_PENDING_TO_ACCEPT_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_WATING_TO_ORDER_READY(),
+                status.getSTATUS_WATING_TO_ORDER_READY_NAME(),status.getSTATUS_WATING_TO_ORDER_READY_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_WATING_ACCEPT_BY_PICKUPBOY(),
+                status.getSTATUS_WATING_ACCEPT_BY_PICKUPBOY_NAME(),status.getSTATUS_WATING_ACCEPT_BY_PICKUPBOY_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_ORDER_STARTED_TO_DELIVERED(),
+                status.getSTATUS_ORDER_STARTED_TO_DELIVERED_NAME(),status.getSTATUS_ORDER_STARTED_TO_DELIVERED_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_ORDER_SUCCESSFULLY_DELIVERED(),
+                status.getSTATUS_ORDER_SUCCESSFULLY_DELIVERED_NAME(),status.getSTATUS_ORDER_SUCCESSFULLY_DELIVERED_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_ORDER_CANCELLED_BY_SELLER(),
+                status.getSTATUS_ORDER_CANCELLED_BY_SELLER_NAME(),status.getSTATUS_ORDER_CANCELLED_BY_SELLER_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_ORDER_CANCELLED_BY_USER(),
+                status.getSTATUS_ORDER_CANCELLED_BY_USER_NAME(),status.getSTATUS_ORDER_CANCELLED_BY_USER_COLORS()));
+
+         orderStatusEntityList.add(new OrderStatusEntity(status.getSTATUS_ORDER_FAILD_TO_DELIVERED(),
+                status.getSTATUS_ORDER_FAILD_TO_DELIVERED_NAME(),status.getSTATUS_ORDER_FAILD_TO_DELIVERED_COLORS()));
+
+        orderStatusRepository.saveAll(orderStatusEntityList);
     }
 
     private void registerLocation() {

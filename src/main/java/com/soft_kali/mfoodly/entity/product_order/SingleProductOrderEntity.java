@@ -1,7 +1,5 @@
 package com.soft_kali.mfoodly.entity.product_order;
 
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.location.CityEntity;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,15 +1,12 @@
 package com.soft_kali.mfoodly.repository;
 
-import com.soft_kali.mfoodly.entity.CategoryEntity;
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.ProductEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.product.CategoryEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.product.ProductEntity;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface ProductRepositoy extends JpaRepository<ProductEntity,Long> {
 

@@ -1,7 +1,7 @@
-package com.soft_kali.mfoodly.entity;
+package com.soft_kali.mfoodly.entity.user;
 
+import com.soft_kali.mfoodly.entity.role.Role;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
-import com.soft_kali.mfoodly.entity.product_order.ProductOrderEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,17 +46,6 @@ public class UserEntity implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProductReviewEntity> productReviewEntityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OutletEntity> outletEntityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProductOrderEntity> productOrderEntityList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<AddressBookEntity> addressBookEntities = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

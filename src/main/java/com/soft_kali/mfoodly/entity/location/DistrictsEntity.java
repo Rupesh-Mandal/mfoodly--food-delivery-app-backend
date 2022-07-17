@@ -23,13 +23,5 @@ public class DistrictsEntity {
     @JoinColumn(name = "countrytId")
     private CountryEntity countryEntity;
 
-    public DistrictsEntity(int districtsId, String name, CountryEntity countryEntity) {
-        this.districtsId = districtsId;
-        this.name = name;
-        this.countryEntity = countryEntity;
-    }
-
-    @OneToMany(mappedBy = "districtsEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    List<CityEntity> cityList=new ArrayList<>();
 
 }

@@ -1,9 +1,9 @@
 package com.soft_kali.mfoodly.entity.product_order;
 
-import com.soft_kali.mfoodly.entity.AddressBookEntity;
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.ProductReviewEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.user.AddressBookEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.user.PickupBoyUserDetails;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import lombok.*;
 
@@ -40,6 +40,11 @@ public class ProductOrderEntity {
     @ManyToOne
     @JoinColumn(name = "outletId")
     private OutletEntity outletName;
+
+    @ManyToOne
+    @JoinColumn(name = "pickupBoyUserDetailsId")
+    private PickupBoyUserDetails pickupBoyUserDetails;
+
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "delivery_address",

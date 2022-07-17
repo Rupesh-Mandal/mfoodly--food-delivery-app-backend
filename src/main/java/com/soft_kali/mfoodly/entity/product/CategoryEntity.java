@@ -1,4 +1,4 @@
-package com.soft_kali.mfoodly.entity;
+package com.soft_kali.mfoodly.entity.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

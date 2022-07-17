@@ -1,6 +1,6 @@
 package com.soft_kali.mfoodly.repository;
 
-import com.soft_kali.mfoodly.entity.OutletEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
 import com.soft_kali.mfoodly.entity.product_order.ProductOrderEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

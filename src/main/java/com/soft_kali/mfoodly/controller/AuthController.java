@@ -3,7 +3,7 @@ package com.soft_kali.mfoodly.controller;
 
 import com.soft_kali.mfoodly.model.JwtAuthRequest;
 import com.soft_kali.mfoodly.model.JwtAuthResponse;
-import com.soft_kali.mfoodly.dto.UserDto;
+import com.soft_kali.mfoodly.dto.user.UserDto;
 import com.soft_kali.mfoodly.jwt.JwtTokenHelper;
 import com.soft_kali.mfoodly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,8 @@
-package com.soft_kali.mfoodly.entity;
+package com.soft_kali.mfoodly.entity.cart;
 
-import com.soft_kali.mfoodly.entity.location.CityEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,20 +14,21 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@Data
 public class CartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cartId;
+    public Long cartId;
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    private UserEntity userEntity;
+    public UserEntity userEntity;
 
 
     @ManyToOne
     @JoinColumn(name = "outletId")
-    private OutletEntity outletEntity;
+    public OutletEntity outletEntity;
 
 
 
@@ -38,7 +37,7 @@ public class CartEntity {
     @JoinTable(name = "cart_product",
             joinColumns = @JoinColumn(name = "cartId", referencedColumnName = "cartId"),
             inverseJoinColumns = @JoinColumn(name = "subCartId", referencedColumnName = "subCartId"))
-    List<SubCartEntity> subCartEntityList = new ArrayList<>();
+    public List<SubCartEntity> subCartEntityList = new ArrayList<>();
 
 
 }

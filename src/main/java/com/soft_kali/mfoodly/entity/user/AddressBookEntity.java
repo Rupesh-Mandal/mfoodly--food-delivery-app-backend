@@ -1,12 +1,10 @@
-package com.soft_kali.mfoodly.entity;
+package com.soft_kali.mfoodly.entity.user;
 
-import com.soft_kali.mfoodly.entity.product_order.ProductOrderEntity;
-import com.soft_kali.mfoodly.entity.product_order.SingleProductOrderEntity;
+import com.soft_kali.mfoodly.entity.location.CityEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table
@@ -25,6 +23,11 @@ public class AddressBookEntity {
     private String deliveryAddress1;
     private String deliveryAddress2;
     private String deliveryAddressPhoneNumber;
+
+
+    @ManyToOne
+    @JoinColumn(name = "cityId")
+    private CityEntity cityEntity;
 
 
     @ManyToOne

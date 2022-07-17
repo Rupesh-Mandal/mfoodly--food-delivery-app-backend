@@ -1,10 +1,8 @@
-package com.soft_kali.mfoodly.entity.location;
+package com.soft_kali.mfoodly.entity.status;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table
@@ -12,11 +10,15 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CountryEntity {
+@Data
+public class OrderStatusEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int countrytId;
-    private String name;
+    private int orderStatusId;
+
+    String name;
+    String statusColorCode;
 
 
 }

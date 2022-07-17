@@ -1,6 +1,6 @@
 package com.soft_kali.mfoodly.controller;
 
-import com.soft_kali.mfoodly.dto.AddressBookDto;
+import com.soft_kali.mfoodly.dto.user.AddressBookDto;
 import com.soft_kali.mfoodly.model.AddressBookResponse;
 import com.soft_kali.mfoodly.model.ApiResponse;
 import com.soft_kali.mfoodly.service.AddressBookService;
@@ -23,9 +23,9 @@ public class AddressBookController {
     AddressBookService addressBookService;
 
 
-    @PostMapping("/add-new-address")
-    ResponseEntity<ApiResponse> addNewAddress(@RequestBody AddressBookDto addressBookDto){
-        ApiResponse apiResponse=addressBookService.addNewAddress(addressBookDto);
+    @PostMapping("cityId/{cityId}/add-new-address")
+    ResponseEntity<ApiResponse> addNewAddress(@RequestBody AddressBookDto addressBookDto, @PathVariable int cityId){
+        ApiResponse apiResponse=addressBookService.addNewAddress(addressBookDto,cityId);
         return new ResponseEntity<>(apiResponse,HttpStatus.CREATED);
     }
 

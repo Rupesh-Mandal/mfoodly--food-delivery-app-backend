@@ -2,10 +2,10 @@ package com.soft_kali.mfoodly.service.impl;
 
 import com.soft_kali.mfoodly.dto.product_order.ProductOrderDto;
 import com.soft_kali.mfoodly.dto.product_order.SingleProductOrderDto;
-import com.soft_kali.mfoodly.entity.AddressBookEntity;
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.ProductEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.user.AddressBookEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.product.ProductEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.entity.product_order.ProductOrderEntity;
 import com.soft_kali.mfoodly.entity.product_order.SingleProductOrderEntity;

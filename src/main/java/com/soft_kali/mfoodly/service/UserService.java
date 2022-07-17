@@ -1,7 +1,7 @@
 package com.soft_kali.mfoodly.service;
 
 
-import com.soft_kali.mfoodly.dto.UserDto;
+import com.soft_kali.mfoodly.dto.user.UserDto;
 
 import java.util.List;
 

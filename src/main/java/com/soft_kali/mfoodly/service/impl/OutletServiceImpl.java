@@ -1,9 +1,9 @@
 package com.soft_kali.mfoodly.service.impl;
 
-import com.soft_kali.mfoodly.dto.OutletDto;
+import com.soft_kali.mfoodly.dto.user.OutletDto;
 import com.soft_kali.mfoodly.model.OutletResponse;
-import com.soft_kali.mfoodly.entity.OutletEntity;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.exeptions.ResourceNotFountException;
 import com.soft_kali.mfoodly.repository.OutletRepository;

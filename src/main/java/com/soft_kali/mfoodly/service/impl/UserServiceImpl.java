@@ -1,9 +1,9 @@
 package com.soft_kali.mfoodly.service.impl;
 
 
-import com.soft_kali.mfoodly.dto.UserDto;
-import com.soft_kali.mfoodly.entity.Role;
-import com.soft_kali.mfoodly.entity.UserEntity;
+import com.soft_kali.mfoodly.dto.user.UserDto;
+import com.soft_kali.mfoodly.entity.role.Role;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.exeptions.ResourceNotFountException;
 import com.soft_kali.mfoodly.repository.RoleRepository;
