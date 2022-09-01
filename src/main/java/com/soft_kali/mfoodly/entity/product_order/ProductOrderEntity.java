@@ -1,5 +1,6 @@
 package com.soft_kali.mfoodly.entity.product_order;
 
+import com.soft_kali.mfoodly.entity.status.OrderStatusEntity;
 import com.soft_kali.mfoodly.entity.user.AddressBookEntity;
 import com.soft_kali.mfoodly.entity.user.OutletEntity;
 import com.soft_kali.mfoodly.entity.user.PickupBoyUserDetails;
@@ -34,6 +35,10 @@ public class ProductOrderEntity {
     private UserEntity userEntity;
 
     @ManyToOne
+    @JoinColumn(name = "sellerId")
+    private UserEntity seller;
+
+    @ManyToOne
     @JoinColumn(name = "cityId")
     private CityEntity cityEntity;
 
@@ -46,14 +51,22 @@ public class ProductOrderEntity {
     private PickupBoyUserDetails pickupBoyUserDetails;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "orderStatusId")
+    private OrderStatusEntity orderStatusEntity;
+
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "delivery_address",
             joinColumns = @JoinColumn(name = "productOrderId", referencedColumnName = "productOrderId"),
             inverseJoinColumns = @JoinColumn(name = "addressBookId", referencedColumnName = "addressBookId"))
     private AddressBookEntity addressBookEntity;
 
 
-    @OneToMany(mappedBy = "ProductOrderEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "order_product",
+            joinColumns = @JoinColumn(name = "productOrderId", referencedColumnName = "productOrderId"),
+            inverseJoinColumns = @JoinColumn(name = "singleProductOrderId", referencedColumnName = "singleProductOrderId"))
     private List<SingleProductOrderEntity> singleProductOrderEntityList = new ArrayList<>();
 
 }

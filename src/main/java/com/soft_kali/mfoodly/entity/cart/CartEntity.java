@@ -20,6 +20,7 @@ public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long cartId;
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "userId")

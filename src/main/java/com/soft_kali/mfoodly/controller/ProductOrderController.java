@@ -23,9 +23,8 @@ public class ProductOrderController {
     private ProductOrderService productOrderService;
 
     @PostMapping("/cityId/{cityId}/addressBookId/{addressBookId}/new-order")
-    public ResponseEntity<ApiResponse> startNewOrder(@RequestBody ProductOrderDto productOrderDto,
-                                                     @PathVariable int cityId,@PathVariable Long addressBookId){
-        ApiResponse apiResponse=productOrderService.startNewOrder(productOrderDto,cityId,addressBookId);
+    public ResponseEntity<ApiResponse> startNewOrder(@PathVariable int cityId,@PathVariable Long addressBookId){
+        ApiResponse apiResponse=productOrderService.startNewOrder(cityId,addressBookId);
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 

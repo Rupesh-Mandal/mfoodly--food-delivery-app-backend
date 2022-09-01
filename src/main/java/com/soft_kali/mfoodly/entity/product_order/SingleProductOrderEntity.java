@@ -23,10 +23,5 @@ public class SingleProductOrderEntity {
     private double sellingprice;
 
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private ProductOrderEntity ProductOrderEntity;
-
-
 
 }

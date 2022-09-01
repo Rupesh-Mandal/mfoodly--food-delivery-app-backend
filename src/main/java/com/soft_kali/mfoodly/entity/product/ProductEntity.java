@@ -3,6 +3,7 @@ package com.soft_kali.mfoodly.entity.product;
 
 import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.entity.user.OutletEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,6 +43,10 @@ public class  ProductEntity {
     @ManyToOne
     @JoinColumn(name = "outletId")
     private OutletEntity outletName;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private UserEntity userEntity;
 
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

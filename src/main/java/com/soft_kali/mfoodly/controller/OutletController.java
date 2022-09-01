@@ -42,7 +42,7 @@ public class OutletController {
 
         Pageable pageable = PageRequest.of(pageNumber.orElse(AppConstants.PAGE_NUMBBER),
                 pageSize.orElse(AppConstants.PAGE_SIZE), sort.orElse(AppConstants.sort),
-                sortBy.orElse(AppConstants.SORT_BY_FOR_POST));
+                sortBy.orElse(AppConstants.SORT_BY_FOR_OUTLET));
 
 
         OutletResponse outletResponse=outletService.getAllOutletByUser(pageable);

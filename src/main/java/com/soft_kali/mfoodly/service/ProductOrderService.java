@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductOrderService {
 
-    ApiResponse startNewOrder(ProductOrderDto productOrderDto, int cityId,Long addressBookId);
+    ApiResponse startNewOrder(int cityId,Long addressBookId);
 
     ApiResponse acceptOrderByOutlet(Long productOrderId,Long outletId);
     ApiResponse cancelOrderByOutlet(Long productOrderId,Long outletId);

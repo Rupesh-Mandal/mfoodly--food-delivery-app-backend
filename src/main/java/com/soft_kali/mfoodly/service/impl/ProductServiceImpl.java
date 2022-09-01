@@ -158,6 +158,7 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setCreatedTime(LocalDateTime.now());
         productEntity.setCityEntity(outletEntity.getCityEntity());
         productEntity.setOutletName(outletEntity);
+        productEntity.setUserEntity(outletEntity.getUserEntity());
 
         List<CategoryEntity> categoryEntityList=new ArrayList<>();
         List<CategoryDto> categoryDtoList=productDto.getCategoryEntities();

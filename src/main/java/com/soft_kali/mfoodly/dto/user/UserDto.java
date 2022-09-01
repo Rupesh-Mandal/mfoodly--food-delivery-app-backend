@@ -26,6 +26,8 @@ public class UserDto {
     @Size(min = 10, max = 10, message = "phone number must be 10 characters !!")
     private String phoneNumber;
 
+    private String email;
+
     @NotEmpty
     @Size(min = 4,max = 10,message = "password must be min 4 charactes and max 10 characters !!")
     private String password;

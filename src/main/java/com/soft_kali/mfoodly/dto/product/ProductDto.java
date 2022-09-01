@@ -4,6 +4,8 @@ package com.soft_kali.mfoodly.dto.product;
 
 import com.soft_kali.mfoodly.dto.user.OutletDto;
 import com.soft_kali.mfoodly.dto.location.CityDto;
+import com.soft_kali.mfoodly.dto.user.UserDto;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -30,6 +32,7 @@ public class ProductDto {
     private CityDto cityEntity;
 
     private OutletDto outletName;
+    private UserDto userEntity;
 
     private List<CategoryDto> categoryEntities;
 

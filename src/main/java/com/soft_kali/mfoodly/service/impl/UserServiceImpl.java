@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
         List<Role> roleList=new ArrayList<>();
         roleList.add(role);
 
+        userEntity.setCreatedTime(LocalDateTime.now());
         userEntity.setRoles(roleList);
         userEntity.setCityEntity(cityEntity);
         UserEntity savedUser=userRepository.save(userEntity);
@@ -60,11 +62,12 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity=modelMapper.map(userDto,UserEntity.class);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 
-        Role role=roleRepository.findById(AppConstants.ROLE_OUTLET).get();
+        Role role=roleRepository.findById(AppConstants.ROLE_SELLER).get();
 
         List<Role> roleList=new ArrayList<>();
         roleList.add(role);
 
+        userEntity.setCreatedTime(LocalDateTime.now());
         userEntity.setRoles(roleList);
         userEntity.setCityEntity(cityEntity);
         UserEntity savedUser=userRepository.save(userEntity);
@@ -110,6 +113,13 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtoList =userEntityList.stream().map(userEntity -> convetToUserDto(userEntity)).collect(Collectors.toList());
 
         return userDtoList;
+    }
+
+    @Override
+    public UserEntity findByPhoneNumber(String phoneNumber) {
+        UserEntity userEntity=userRepository.findByPhoneNumber(phoneNumber).orElseThrow(()-> new ResourceNotFountException("phoneNumber","=",phoneNumber));
+
+        return userEntity;
     }
 
 

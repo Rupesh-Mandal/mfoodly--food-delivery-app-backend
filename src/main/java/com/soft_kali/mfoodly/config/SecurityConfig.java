@@ -28,7 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String[] PUBLIC_URL={
             "/api/v1/auth/**",
-            "/api/user/"
+            "/api/v1/admin/login",
+            "/api/user/",
+            "/api/v1/file/**",
+            "/api/v1/seller/login**"
     };
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;

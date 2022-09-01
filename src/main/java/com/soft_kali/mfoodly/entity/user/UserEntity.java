@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,9 +29,13 @@ public class UserEntity implements UserDetails {
 
     private String name;
 
+    private LocalDateTime createdTime;
 
     @Column(unique = true, nullable = false)
     private String phoneNumber;
+
+    @Column(unique = true)
+    private String email;
 
     private String password;
 

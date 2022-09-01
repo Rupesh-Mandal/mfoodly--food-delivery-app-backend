@@ -6,19 +6,26 @@ import com.soft_kali.mfoodly.entity.location.CityEntity;
 import com.soft_kali.mfoodly.entity.location.CountryEntity;
 import com.soft_kali.mfoodly.entity.location.DistrictsEntity;
 import com.soft_kali.mfoodly.entity.status.OrderStatusEntity;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import com.soft_kali.mfoodly.repository.CategoryRepository;
 import com.soft_kali.mfoodly.repository.OrderStatusRepository;
 import com.soft_kali.mfoodly.repository.RoleRepository;
+import com.soft_kali.mfoodly.repository.UserRepository;
 import com.soft_kali.mfoodly.repository.location.CityRepository;
 import com.soft_kali.mfoodly.repository.location.CountryRepository;
 import com.soft_kali.mfoodly.repository.location.DistrictsRepository;
 import com.soft_kali.mfoodly.service.ConstantService;
 import com.soft_kali.mfoodly.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.soft_kali.mfoodly.utils.AppConstants.admin;
+import static com.soft_kali.mfoodly.utils.AppConstants.defaultPass;
 
 @Service
 public class ConstantServiceImpl implements ConstantService {
@@ -40,13 +47,38 @@ public class ConstantServiceImpl implements ConstantService {
     @Autowired
     OrderStatusRepository orderStatusRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public void saveConstant() {
         registerRole();
         registerCategory();
         registerLocation();
         registerOrderStatus();
+        registerAdmin();
 
+    }
+
+    private void registerAdmin() {
+        if (userRepository.findByPhoneNumber(admin).isPresent()){
+            return;
+        }
+        PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+
+        Role role=roleRepository.findById(AppConstants.ROLE_ADMIN).get();
+
+        List<Role> roleList=new ArrayList<>();
+        roleList.add(role);
+
+        UserEntity userEntity=new UserEntity();
+        userEntity.setPhoneNumber(admin);
+        userEntity.setName(admin);
+        userEntity.setPassword(passwordEncoder.encode(defaultPass));
+        UserEntity savedAdmin=userRepository.save(userEntity);
+
+        savedAdmin.setRoles(roleList);
+        userRepository.save(savedAdmin);
     }
 
     private void registerOrderStatus() {
@@ -111,7 +143,7 @@ public class ConstantServiceImpl implements ConstantService {
         List<Role> roleList = new ArrayList<>();
         roleList.add(new Role(AppConstants.ROLE_ADMIN, "ROLE_ADMIN"));
         roleList.add(new Role(AppConstants.ROLE_SUB_ADMIN, "ROLE_SUB_ADMIN"));
-        roleList.add(new Role(AppConstants.ROLE_OUTLET, "ROLE_OUTLET"));
+        roleList.add(new Role(AppConstants.ROLE_SELLER, "ROLE_SELLER"));
         roleList.add(new Role(AppConstants.ROLE_SUB_OUTLET, "ROLE_SUB_OUTLET"));
         roleList.add(new Role(AppConstants.ROLE_PICKUP_BOY, "ROLE_PICKUP_BOY"));
         roleList.add(new Role(AppConstants.ROLE_CUSTOMER, "ROLE_CUSTOMER"));

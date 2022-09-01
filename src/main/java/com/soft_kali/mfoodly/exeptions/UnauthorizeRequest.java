@@ -9,10 +9,8 @@ import lombok.Setter;
 @Setter
 public class UnauthorizeRequest extends RuntimeException{
 
-    String message;
 
     public UnauthorizeRequest(String message) {
         super(message);
-        this.message = message;
     }
 }

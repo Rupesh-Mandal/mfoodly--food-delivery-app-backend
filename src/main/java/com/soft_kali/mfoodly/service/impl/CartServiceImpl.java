@@ -64,6 +64,10 @@ public class CartServiceImpl implements CartService {
             subCartEntity.setProductEntity(productEntity);
             subCartEntityList.add(subCartEntity);
 
+            double totalPrice=cartEntity.getTotalPrice();
+            totalPrice=totalPrice+(quantity*productEntity.getSellingprice());
+            cartEntity.setTotalPrice(totalPrice);
+
             cartEntity.setSubCartEntityList(subCartEntityList);
             cartRepository.save(cartEntity);
 
@@ -80,6 +84,11 @@ public class CartServiceImpl implements CartService {
         subCartEntity.setProductEntity(productEntity);
         List<SubCartEntity> subCartEntityList=new ArrayList<>();
         subCartEntityList.add(subCartEntity);
+
+        double totalPrice=0.00;
+        totalPrice=totalPrice+(quantity*productEntity.getSellingprice());
+        cartEntity.setTotalPrice(totalPrice);
+
 
         cartEntity.setSubCartEntityList(subCartEntityList);
         cartRepository.save(cartEntity);

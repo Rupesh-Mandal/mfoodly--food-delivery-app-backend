@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CartDto {
     private Long cartId;
+    private double totalPrice;
     private UserDto userEntity;
     private OutletDto outletEntity;
     List<SubCartDto> subCartEntityList;

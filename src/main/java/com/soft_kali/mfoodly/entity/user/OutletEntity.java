@@ -35,8 +35,5 @@ public class OutletEntity {
     private UserEntity userEntity;
 
 
-    @ManyToOne
-    @JoinColumn(name = "subOutletUserId", referencedColumnName = "userId")
-    private UserEntity subOutletUser;
 
 }

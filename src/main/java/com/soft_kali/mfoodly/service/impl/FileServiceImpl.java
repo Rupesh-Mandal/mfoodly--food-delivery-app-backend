@@ -13,8 +13,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String uploadImage(String path, MultipartFile file, String fileName) throws IOException {
 
-        String name= file.getOriginalFilename();
-        String fileName1=fileName.concat(name.substring(name.lastIndexOf(".")));
+        String fileName1=fileName+".jpg";
 
         String filePath=path+ File.separator+fileName1;
 
@@ -35,9 +34,28 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public InputStream getResource(String path, String fileName) throws FileNotFoundException {
-        String fullPath=path+File.separator+fileName;
+        String fullPath=path+File.separator+fileName+".jpg";;
         InputStream inputStream=new FileInputStream(fullPath);
         return inputStream;
+    }
+
+    @Override
+    public void deleteImage(String path, String fileName) {
+        String fileName1=fileName+".jpg";
+
+        String filePath=path+ File.separator+fileName1;
+
+        File f=new File(path);
+        if (!f.exists()){
+            f.mkdir();
+        }
+
+        File previousFile=new File(filePath);
+        if (previousFile.exists()){
+            previousFile.delete();
+        }
+
+
     }
 
 }

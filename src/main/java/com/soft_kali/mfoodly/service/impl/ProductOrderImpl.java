@@ -2,6 +2,9 @@ package com.soft_kali.mfoodly.service.impl;
 
 import com.soft_kali.mfoodly.dto.product_order.ProductOrderDto;
 import com.soft_kali.mfoodly.dto.product_order.SingleProductOrderDto;
+import com.soft_kali.mfoodly.entity.cart.CartEntity;
+import com.soft_kali.mfoodly.entity.cart.SubCartEntity;
+import com.soft_kali.mfoodly.entity.status.OrderStatusEntity;
 import com.soft_kali.mfoodly.entity.user.AddressBookEntity;
 import com.soft_kali.mfoodly.entity.user.OutletEntity;
 import com.soft_kali.mfoodly.entity.product.ProductEntity;
@@ -13,12 +16,10 @@ import com.soft_kali.mfoodly.exeptions.ResourceNotFountException;
 import com.soft_kali.mfoodly.exeptions.UnauthorizeRequest;
 import com.soft_kali.mfoodly.model.ApiResponse;
 import com.soft_kali.mfoodly.model.ProductOrderResponse;
-import com.soft_kali.mfoodly.repository.AddressBookRepository;
-import com.soft_kali.mfoodly.repository.OutletRepository;
-import com.soft_kali.mfoodly.repository.ProductOrderRepository;
-import com.soft_kali.mfoodly.repository.ProductRepositoy;
+import com.soft_kali.mfoodly.repository.*;
 import com.soft_kali.mfoodly.repository.location.CityRepository;
 import com.soft_kali.mfoodly.service.ProductOrderService;
+import com.soft_kali.mfoodly.utils.OrderStatus;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,84 +54,69 @@ public class ProductOrderImpl implements ProductOrderService {
     @Autowired
     AddressBookRepository addressBookRepository;
 
+    @Autowired
+    CartRepository cartRepository;
+
+    @Autowired
+    OrderStatusRepository orderStatusRepository;
+
+    @Autowired
+    SingleProductOrderRepository singleProductOrderRepository;
+
     @Override
-    public ApiResponse startNewOrder(ProductOrderDto productOrderDto, int cityId, Long addressBookId) {
+    public ApiResponse startNewOrder(int cityId, Long addressBookId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity userEntity = modelMapper.map(authentication.getPrincipal(), UserEntity.class);
 
         AddressBookEntity addressBookEntity = addressBookRepository.findById(addressBookId).orElseThrow(() -> new ResourceNotFountException("Address Book", "id", addressBookId));
         CityEntity cityEntity = cityRepository.findById(cityId).orElseThrow(() -> new ResourceNotFountException("City", "id", cityId));
+        List<CartEntity> cartEntityList=cartRepository.findAllByUserEntity(userEntity);
 
-        List<SingleProductOrderDto> singleProductOrderDtoList = productOrderDto.getSingleProductOrderEntityList();
-        if (singleProductOrderDtoList.size() == 0) {
-            throw new ResourceNotFountException("Product is empty", "null", 0);
-        }
-        List<ProductOrderEntity> productOrderEntityList = new ArrayList<>();
+        List<ProductOrderEntity> productOrderEntityList=new ArrayList<>();
 
-        for (int i = 0; i < singleProductOrderDtoList.size(); i++) {
-            SingleProductOrderDto singleProductOrderDto = singleProductOrderDtoList.get(i);
-            ProductEntity productEntity = productRepositoy.findById(singleProductOrderDto.getProductId()).orElseThrow(() -> new ResourceNotFountException("Product", "id", singleProductOrderDto.getProductId()));
-            OutletEntity outletEntity = productEntity.getOutletName();
+        OrderStatusEntity orderStatusEntity=orderStatusRepository.findById(new OrderStatus().getSTATUS_PENDING_TO_ACCEPT()).get();
 
-            singleProductOrderDto.setProductId(productEntity.getProductId());
-            singleProductOrderDto.setProductImageLink(productEntity.getProductImageLink());
-            singleProductOrderDto.setMarkedPrice(productEntity.getMarkedPrice());
-            singleProductOrderDto.setSellingprice(productEntity.getSellingprice());
 
-            for (int i2 = 0; i2 < productOrderEntityList.size(); i2++) {
-                OutletEntity outletEntity2 = productOrderEntityList.get(i2).getOutletName();
-                if (outletEntity.getOutletId() == outletEntity2.getOutletId()) {
-                    ProductOrderEntity productOrderEntity = productOrderEntityList.get(i2);
+        for (int i=0;i<cartEntityList.size();i++){
+            CartEntity cartEntity=cartEntityList.get(i);
 
-                    productOrderEntity.setUserEntity(userEntity);
-                    productOrderEntity.setCityEntity(cityEntity);
-                    productOrderEntity.setAddressBookEntity(addressBookEntity);
-                    productOrderEntity.setOutletName(outletEntity2);
+            ProductOrderEntity productOrderEntity=new ProductOrderEntity();
+            productOrderEntity.setCreatedTime(LocalDateTime.now());
+            productOrderEntity.setTotalPrice(cartEntity.getTotalPrice());
+            productOrderEntity.setUserEntity(userEntity);
+            productOrderEntity.setCityEntity(cityEntity);
+            productOrderEntity.setOutletName(cartEntity.getOutletEntity());
+            productOrderEntity.setAddressBookEntity(addressBookEntity);
+            productOrderEntity.setOrderStatusEntity(orderStatusEntity);
+            productOrderEntity.setSeller(cartEntity.getOutletEntity().getUserEntity());
+            productOrderEntity.setCreatedTime(LocalDateTime.now());
 
-                    SingleProductOrderEntity singleProductOrderEntity = modelMapper.map(singleProductOrderDto, SingleProductOrderEntity.class);
-                    List<SingleProductOrderEntity> singleProductOrderEntityList = productOrderEntity.getSingleProductOrderEntityList();
-                    singleProductOrderEntityList.add(singleProductOrderEntity);
+            List<SingleProductOrderEntity> singleProductOrderEntityList = new ArrayList<>();
 
-                    productOrderEntity.setSingleProductOrderEntityList(singleProductOrderEntityList);
-                    productOrderEntityList.add(i2, productOrderEntity);
-                } else {
-                    ProductOrderEntity productOrderEntity = productOrderEntityList.get(i2);
+            for (int i2=0;i2<cartEntity.getSubCartEntityList().size();i2++){
+                SubCartEntity subCartEntity=cartEntity.getSubCartEntityList().get(i2);
 
-                    productOrderEntity.setUserEntity(userEntity);
-                    productOrderEntity.setCityEntity(cityEntity);
-                    productOrderEntity.setAddressBookEntity(addressBookEntity);
-                    productOrderEntity.setOutletName(outletEntity2);
-
-                    SingleProductOrderEntity singleProductOrderEntity = modelMapper.map(singleProductOrderDto, SingleProductOrderEntity.class);
-                    List<SingleProductOrderEntity> singleProductOrderEntityList = new ArrayList<>();
-                    singleProductOrderEntityList.add(singleProductOrderEntity);
-
-                    productOrderEntity.setSingleProductOrderEntityList(singleProductOrderEntityList);
-                    productOrderEntityList.add(productOrderEntity);
-                    sendNotification();
-                }
-            }
-            if (productOrderEntityList.size() == 0) {
-                ProductOrderEntity productOrderEntity = new ProductOrderEntity();
-
-                OutletEntity outletEntity2 = productEntity.getOutletName();
-
-                productOrderEntity.setUserEntity(userEntity);
-                productOrderEntity.setCityEntity(cityEntity);
-                productOrderEntity.setAddressBookEntity(addressBookEntity);
-                productOrderEntity.setOutletName(outletEntity2);
-
-                SingleProductOrderEntity singleProductOrderEntity = modelMapper.map(singleProductOrderDto, SingleProductOrderEntity.class);
-                List<SingleProductOrderEntity> singleProductOrderEntityList = new ArrayList<>();
+                SingleProductOrderEntity singleProductOrderEntity=new SingleProductOrderEntity();
+                singleProductOrderEntity.setProductId(subCartEntity.productEntity.getProductId());
+                singleProductOrderEntity.setMarkedPrice(subCartEntity.productEntity.getMarkedPrice());
+                singleProductOrderEntity.setSellingprice(subCartEntity.getProductEntity().getSellingprice());
                 singleProductOrderEntityList.add(singleProductOrderEntity);
-
-                productOrderEntity.setSingleProductOrderEntityList(singleProductOrderEntityList);
-                productOrderEntityList.add(productOrderEntity);
-                sendNotification();
             }
+            List<SingleProductOrderEntity> savedSingleProduct = singleProductOrderRepository.saveAll(singleProductOrderEntityList);
+
+            System.out.println("singleProductOrderRepository " + singleProductOrderEntityList.size());
+            System.out.println("getSubCartEntityList " + cartEntity.getSubCartEntityList().size());
+            System.out.println("savedSingleProduct " + savedSingleProduct.size());
+
+            productOrderEntity.setSingleProductOrderEntityList(savedSingleProduct);
+
+            productOrderEntityList.add(productOrderEntity);
 
         }
+
+
         productOrderRepository.saveAll(productOrderEntityList);
+
         return new ApiResponse("Order Successfull",true);
     }
 

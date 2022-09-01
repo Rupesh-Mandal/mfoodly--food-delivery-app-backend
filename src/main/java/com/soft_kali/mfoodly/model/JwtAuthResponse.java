@@ -1,5 +1,6 @@
 package com.soft_kali.mfoodly.model;
 
+import com.soft_kali.mfoodly.entity.user.UserEntity;
 import lombok.*;
 
 @Data

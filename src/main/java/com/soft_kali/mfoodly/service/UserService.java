@@ -2,6 +2,8 @@ package com.soft_kali.mfoodly.service;
 
 
 import com.soft_kali.mfoodly.dto.user.UserDto;
+import com.soft_kali.mfoodly.entity.user.UserEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -16,4 +18,5 @@ public interface UserService {
     List<UserDto> getAllUser();
 
 
+    UserEntity findByPhoneNumber(String phoneNumber);
 }

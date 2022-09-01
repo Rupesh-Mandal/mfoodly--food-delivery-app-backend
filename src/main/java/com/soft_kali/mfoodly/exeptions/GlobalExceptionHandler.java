@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.util.NestedServletException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,17 +30,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
     }
 
+
     @ExceptionHandler(UnauthorizeRequest.class)
     public ResponseEntity<ApiResponse> unauthorizeRequestExceptionHandler(UnauthorizeRequest exception){
         String message=exception.getMessage();
-        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<ApiResponse> exception(Exception exception){
-//        String message=exception.getMessage();
-//        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(BadRequest.class)
+    public ResponseEntity<ApiResponse> badRequestExceptionHandler(BadRequest exception){
+        String message=exception.getMessage();
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> exception(Exception exception){
+        String message=exception.getMessage();
+        return new ResponseEntity<>(new ApiResponse(message,false), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(IllegalAccessException.class)
     public ResponseEntity<ApiResponse> exception(IllegalAccessException exception){
